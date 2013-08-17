@@ -1,0 +1,469 @@
+<!--
+    ABC iView Client for HTML5-compatible browsers
+    Copyright (C) 2013  Adam Malcontenti-Wilson
+
+    This program is free software; you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation; either version 2 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License along
+    with this program; if not, write to the Free Software Foundation, Inc.,
+    51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+-->
+<!DOCTYPE html>
+<html class="no-js" ng-app="iviewhtml5">
+  <head>
+    <meta charset="utf-8">
+    <title>iviewhtml5</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- bootstrap -->
+    <link href="//netdna.bootstrapcdn.com/bootswatch/2.3.2/cyborg/bootstrap.min.css" rel="stylesheet">
+    <style type="text/css">
+      body {
+        padding-top: 60px;
+        padding-bottom: 40px;
+      }
+      .sidebar-nav {
+        padding: 9px 0;
+      }
+      
+      /* hide browser compat warning on supported browsers */
+      html.js.video #compat-warning {
+        display: none;
+      }     
+
+      .program .thumbnail {
+        /*box-shadow: rgba(255,255,255,0.5) 0 0 3px;
+        border: 1px solid #000;*/
+        width: 220px;
+        height: 126px;
+      }
+      .program .title {
+        font-size: 120%;
+        color: #fff;
+        margin-top: 8px;
+      }
+
+      .episode-row {
+        margin-bottom: 16px;
+        border-bottom: #999 solid 1px;
+        padding-bottom: 16px;
+      }
+
+      .episode-row .head {
+        font-weight: bold;
+      }
+
+      .video {
+        width: 100%;
+      }
+
+      @media (max-width: 980px) {
+        /* Enable use of floated navbar text */
+        .navbar-text.pull-right {
+          float: none;
+          padding-left: 5px;
+          padding-right: 5px;
+        }
+      }
+    </style>
+    <link href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.2/css/bootstrap-responsive.min.css" rel="stylesheet">
+
+    <!-- modernizr -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+  </head>
+
+  <body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="brand" href="#">iview.in.html5</a>
+          <div class="nav-collapse collapse">
+            <ul class="nav">
+              <li ng-class="{active:$state.is('home')}"><a href="#">Home</a></li>
+              <li ng-class="{active:$state.includes('browse')}"><a href="#/browse">Browse</a></li>
+              <li><a href="#/about">About</a></li>
+              <li><a href="#/contact">Contact</a></li>
+            </ul>
+            <form class="navbar-search pull-right" ng-controller="SearchController" ng-submit="search()">
+              <div class="input-append">
+                <input class="span2" type="search" placeholder="Search" ng-model="query">
+                <button type="submit" class="btn">Search</button>
+              </div>
+            </form>
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
+
+    <div class="container" id="root-container">
+
+      <!-- alert for old browsers -->
+      <div class="row">
+        <div class="span12">
+          <div class="hero-unit alert alert-error" id="compat-warning">
+            <h1>You need a newer browser</h1>
+            <p>This app uses HTML5 video to play videos, which your browser does not support. </p>
+            <p>To ensure this app works correctly, upgrade to a modern browser.</p>
+            <p>Alternatively, you can use the offical ABC iView which supports older browsers using Adobe Flash.</p>
+            <p><a href="http://www.whatbrowser.org/intl/en/" class="btn btn-primary btn-large">Learn more &raquo;</a></p>
+          </div>
+        </div><!--/span-->
+      </div><!--/row-->
+
+      <!-- container for angularjs view -->
+      <div ui-view></div>
+
+      <hr>
+
+      
+      <footer>
+        <p class="pull-right"><a href="#" onclick="window.scrollTo(0,0); return false;">back to top</a></p>
+
+        <!-- attribution -->
+        <p>Developed by <a href="https://github.com/adammw">adammw</a>. Built with <a href="http://getbootstrap.com/">Bootstap</a> and <a href="http://angularjs.org/">AngularJS</a>.</p>
+
+        <!-- disclaimer -->
+        <p>Intellectual property rights including logos, images, names, designs, trademarks and copyright of audio-visual and text content are reserved to the ABC and its licensors. </p>
+      </footer>
+
+    </div><!--/.fluid-container-->
+
+    <!-- templates -->
+    <script type="text/ng-template" id="home">
+      <h2>Home</h2>
+      <p>This page isn't finished yet, I'd like to put on it:</p>
+      <ul>
+      <li>A news pane showing new and upcoming shows on iView</li>
+      <li>A nice carousel or scroller at the top of this page showing featured programs, similar to the offical client</li>
+      <li>Other nice features like showing a preview of recently added or last chance views, and/or a favourites option</li>
+      </ul>
+      <p>To start browsing anyway, click the browse navigation link at the top of the page</p>
+    </script>
+
+    <script type="text/ng-template" id="about">
+      <h2>About this app</h2>
+      <p>This is a proof-of-concept app designed to work in any modern web browser without requiring any plugins - meaning it should be able to be run on desktop PCs and laptops, as well as mobile devices such as tablets and smartphones.</p>
+      <p>As this app is developed by a third-party, it should be obvious that it is in no way endorsed by the ABC, and they own the interlectual property rights to the content provided through the app as well as the ABC and iView trademarks.</p>
+    </script>
+
+
+    <script type="text/ng-template" id="browse">
+      <div class="row">
+        <div class="span3">
+          <div class="well sidebar-nav">
+            <ul class="nav nav-list">
+              <li ng-class="{active:'featured' == $state.params.category}"><a href="#/browse/featured">Featured</a></li>
+              <li ng-class="{active:'recent' == $state.params.category}"><a href="#/browse/recent">Recently Added</a></li>
+              <li ng-class="{active:'last-chance' == $state.params.category}"><a href="#/browse/last-chance">Last Chance</a></li>
+              <li class="nav-header">Categories</li>
+              <li ng-repeat="category in categories" ng-class="{active:category.id == $state.params.category}"><a href="#{{$state.href('browse.list', {category: category.id})}}">{{category.name}}</a></li>
+            </ul>
+          </div><!--/.well -->
+        </div><!--/span-->
+        <div class="span9">
+          <div ui-view></div>
+        </div>
+      </div><!--/row-->
+    </script>
+
+    <script type="text/ng-template" id="browse.list">
+      <h2>{{category.name || "Programs"}}</h2>
+      <ul class="nav nav-tabs">
+        <li ng-class="{active:$state.is('browse.list')}"><a href="#{{$state.href('browse.list', {category: category.id})}}">All</a></li>
+        <li ng-class="{active:$state.params.subcategory == child.id}" ng-repeat="child in category.children"><a href="#{{$state.href('browse.sublist', {category: category.id, subcategory: child.id})}}">{{child.name}}</a></li>
+        <li class="dropdown pull-right">Sort By:
+          <div class="btn-group">
+            <button class="btn" ng-model="sortBy" btn-radio="'seriesTitle'">Series Name</button>
+            <button class="btn" ng-model="sortBy" btn-radio="'seriesPubDate'">Broadcast Date</button>
+            <button class="btn" ng-model="sortBy" btn-radio="'seriesExpireDate'">Expiry Date</button>
+          </div>
+        </li>
+      </ul>
+      <div ng-repeat="program in programs" ng-switch on="$index % 3">
+        <div class="row-fluid" ng-switch-when="0">
+          <div class="program span4" ng-repeat="program in programs | sortAndSlice:sortBy:$index | limitTo:3">
+            <a href="#/series/{{program.seriesId}}">
+              <img class="thumbnail" ng-src="{{program.thumbnail}}" />
+              <p class="title">{{program.seriesTitle}}</p>
+            </a>
+          </div>
+        </div>
+      </div>
+    </script>
+
+    <script type="text/ng-template" id="program">
+      <h2>{{program.seriesTitle}}</h2>
+      <div class="row episode-row" ng-repeat="episode in program.episodes">
+        <div class="span3">
+          <a href="#/view/{{program.seriesId}}/{{episode.id}}"><img class="thumbnail" ng-src="{{program.thumbnail}}" /></a>
+        </div>
+        <div class="span7">
+          <h3><a href="#/view/{{program.seriesId}}/{{episode.id}}">{{episode.basicTitle}}</a></h3>
+          <p class="description">{{episode.description}}</p>
+        </div>
+        <div class="span2">
+          <p><a href="#/view/{{program.seriesId}}/{{episode.id}}" class="btn btn-large btn-primary">Watch Program</a></p>
+          <div class="row">
+            <div class="span1 head">
+              Duration:
+            </div>
+            <div class="span1">
+              {{episode.duration|hms}}
+            </div>
+          </div>
+          <div class="row">
+            <div class="span1 head">
+              Rating:
+            </div>
+            <div class="span1">
+              {{episode.rating}}
+            </div>
+          </div>
+          <div class="row">
+            <div class="span1 head">
+              Expires:
+            </div>
+            <div class="span1">
+              {{episode.expireDate|fromNow:true}}
+            </div>
+          </div>
+          <div class="row">
+            <div class="span1 head">
+              Broadcast:
+            </div>
+            <div class="span1">
+               {{episode.transmitDate|timeFormat:'D/MM/YY'}}
+            </div>
+          </div>
+        </div>
+      </div>
+    </script>
+
+    <script type="text/ng-template" id="view">
+      <h2>{{episodeData.seriesTitle}} - {{episodeData.basicTitle}}</h2>
+      <video controls poster="{{episodeData.thumbnail}}" ng-src="{{episodeData.videoAsset}}" class="video" />
+      <p class="description">{{episodeData.description}}</p>
+    </script>
+
+    <!-- scripts -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.1.0/moment.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.1.5/angular.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.0.1/angular-ui-router.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.5.0/ui-bootstrap-tpls.min.js"></script>
+    <script>
+
+    var iviewhtml5 = angular.module('iviewhtml5', ['ui.bootstrap', 'ui.state']);
+    iviewhtml5.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
+      $urlRouterProvider
+        .when('/browse', '/browse/featured')
+        .otherwise("/") 
+
+      $stateProvider
+        .state('home', {
+          url: '/',
+          templateUrl: 'home'
+        })
+        .state('about', {
+          url: '/about',
+          templateUrl: 'about'
+        })
+        .state('browse', {
+          url: '/browse',
+          templateUrl: 'browse',
+          controller: 'CategoriesListController',
+        })
+        .state('browse.list', {
+          url: '/:category',
+          templateUrl: 'browse.list',
+          controller: 'ProgramListController'
+        })
+        .state('browse.sublist', {
+          url: '/:category/:subcategory',
+          templateUrl: 'browse.list',
+          controller: 'ProgramListController'
+        })
+        .state('program', {
+          url: '/series/:seriesId',
+          templateUrl: 'program',
+          controller: 'ProgramDetailController'
+        })
+        .state('view', {
+          url: '/view/:seriesId/:episodeId',
+          templateUrl: 'view',
+          controller: 'EpisodeDetailController'
+        })
+    }]);
+    iviewhtml5.run(['$rootScope', '$state', '$stateParams', function($rootScope, $state, $stateParams) {
+      $rootScope.$state = $state;
+      $rootScope.$stateParams = $stateParams;
+    }]);
+    iviewhtml5.filter('hms', function() {
+      return function(input) {
+        input = parseInt(input);
+        var hours = parseInt( input / 3600 ) % 24;
+        var minutes = parseInt( input / 60 ) % 60;
+        var seconds = input % 60;
+        var output = minutes + ':' + (seconds < 10 ? '0' + seconds : seconds);
+        if (hours) {
+          output = (hours < 10 ? "0" + hours : hours) + ':' + (minutes < 10 ? "0" + minutes : minutes) + ':' + (seconds  < 10 ? "0" + seconds : seconds);
+        }
+        return output;
+      }
+    });
+    iviewhtml5.filter('timeFormat', function() {
+      return function(input, format) {
+        return moment(input).format(format);
+      }
+    });
+    iviewhtml5.filter('fromNow', function() {
+      return function(input, bool) {
+        return moment(input).fromNow(bool);
+      }
+    });
+    iviewhtml5.filter('sortAndSlice', function() {
+      return function(input, sortCol, offset) {
+        input.sort(function(a, b) {
+          a = a[sortCol];
+          b = b[sortCol];
+          
+          if ('string' === typeof a)
+            a = a.toLowerCase().replace(/\s*the\s*/g,'');
+          if ('string' === typeof b)
+            b = b.toLowerCase().replace(/\s*the\s*/g,'');
+          
+          if (a > b)
+            return 1;
+          if (a < b)
+            return -1;
+          return 0;
+        });
+        return input.slice(offset);
+      }
+    });
+    iviewhtml5.service('apiService', ['$q','$http', function($q, $http) {
+      this.get = function(url) {
+        var deferred = $q.defer();
+        $http.get(url, {cache: true}).success(function(data) {
+          deferred.resolve(data);
+        }).error(function(data){
+          deferred.reject(data) 
+        });
+        return deferred.promise;
+      }
+      this.categories = function() {
+        return this.get('/api?categories');
+      };
+      this.category = function(categoryId) {
+        var deferred = $q.defer();
+        this.categories().then(function(categories) {
+          categories.forEach(function(category) {
+            if (categoryId == category.id)
+              deferred.resolve(category);
+          })
+        }, function(data) {
+          deferred.reject(data);
+        });
+        return deferred.promise;
+      };
+      this.programs = function(keyword) {
+        return this.get('/api?keyword=' + keyword);
+      };
+      this.program = function(seriesId) {
+        return this.get('/api?series=' + seriesId);
+      };
+      this.episode = function(seriesId, episodeId) {
+        var deferred = $q.defer();
+        $http.get('/api2?series=' + seriesId).success(function(data) {
+          var dom = new DOMParser().parseFromString(data, "text/xml");
+          var items = dom.getElementsByTagName('item');
+          for (var i = 0; i < items.length; i++) {
+            var item = items[i];
+            if (/http:\/\/www.abc.net.au\/iview\/#\/view\/(\d+)/.exec(item.getElementsByTagName('guid')[0].textContent)[1] == episodeId) {
+              deferred.resolve({
+                seriesTitle: item.getElementsByTagName('title')[0].textContent,
+                basicTitle: item.getElementsByTagName('subtitle')[0].textContent,
+                description: item.getElementsByTagName('description')[0].textContent,
+                thumbnail: item.getElementsByTagName('thumbnail')[0].attributes.url.value,
+                videoAsset: item.getElementsByTagName('videoAsset')[0].textContent
+              });
+              break;
+            }
+          }
+        }).error(function(data){
+          deferred.reject(data);
+        });
+        return deferred.promise;
+      };
+    }]);
+    iviewhtml5.controller('CategoriesListController', ['$scope', '$state', 'apiService', function($scope, $state, apiService) {
+      apiService.categories().then(function(data) {
+        $scope.categories = data;
+      });
+    }]);
+    iviewhtml5.controller('ProgramListController', ['$scope', '$state', 'apiService', function($scope, $state, apiService) {
+      if (!$scope.sortBy)
+        $scope.sortBy = 'seriesTitle';
+      apiService.category($state.params.category).then(function(category) {
+        $scope.category = category;
+      });
+      var programSearchCategory = $state.params.subcategory || $state.params.category || 'featured';
+      apiService.programs(programSearchCategory).then(function(programs) {
+        $scope.programs = programs;
+        if ('seriesPubDate' == $scope.sortBy || 'seriesExpireDate' == $scope.sortBy) {
+          $scope.programs.sort(function(a, b) {
+            a = a[$scope.sortBy];
+            b = b[$scope.sortBy];
+            if (a > b)
+              return 1;
+            if (a < b)
+              return -1;
+            return 0;
+          });
+        } else {
+          $scope.programs.sort(function(a, b) {
+            a = a.seriesTitle.toLowerCase().replace(/\s*the\s*/g,'');
+            b = b.seriesTitle.toLowerCase().replace(/\s*the\s*/g,'');
+            if (a > b)
+              return 1;
+            if (a < b)
+              return -1;
+            return 0;
+          });
+        }       
+      });
+    }]);
+    iviewhtml5.controller('ProgramDetailController', ['$scope', '$state', 'apiService', function($scope, $state, apiService) {
+      apiService.program($state.params.seriesId).then(function(program) {
+        $scope.program = program[0];
+      });
+    }]);
+    iviewhtml5.controller('EpisodeDetailController', ['$scope', '$state', 'apiService', function ($scope, $state, apiService) {
+      apiService.episode($state.params.seriesId, $state.params.episodeId).then(function(data) {
+        $scope.episodeData = data;
+      });
+    }]);
+    iviewhtml5.controller('SearchController', ['$scope', function($scope) {
+      $scope.search = function() {
+        alert('TODO: Search for "'+ $scope.query + '"');
+      }
+    }]);
+    </script>
+  </body>
+</html>
